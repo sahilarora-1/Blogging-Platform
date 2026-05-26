@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-header">
+    <h1>Welcome {{ request.user.username }}</h1>
+    <a class="primary-btn" href="/create-post/">+ Create New Post</a>
+</div>
+
+{% if page_obj %}
+    {% for post in page_obj %}
+        <div class="post-card">
+            <h3>{{ post.title }}</h3>
+            
+            <p>Last updated {{ post.updated_at|date:"M d, Y" }}</p>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="dashboard-image">
+            {% endif %}
+
+            <div class="action-links">
+                <a class="view-btn" href="/blog/{{ post.slug }}/">View</a>
+
+                <a class="edit-btn" href="/edit-post/{{ post.id }}/">Edit</a>
+
+                <a class="delete-btn"
+                href="/delete-post/{{ post.id }}/"
+                onclick="return confirm('Are you sure you want to delete this post?')">
+                Delete
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="post-card">
+        <h3>No posts yet</h3>
+        <p>Create your first post.</p>
+    </div>
+{% endif %}
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">← Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next →</a>
+    {% endif %}
+</div>
+
+{% endblock %}

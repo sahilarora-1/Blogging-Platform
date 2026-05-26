@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>Latest Blog Posts</h1>
+<form method="GET" class="search-box">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search blogs..."
+        value="{{ query|default:'' }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+{% if page_obj %}
+    {% for post in page_obj %}
+        <div class="post-card">
+            <h2>
+                <a href="/blog/{{ post.slug }}/">{{ post.title }}</a>
+            </h2>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+            {% endif %}
+
+            <p>{{ post.content|truncatewords:30 }}</p>
+
+            <small>
+                By {{ post.author.username }} • {{ post.created_at|date:"M d, Y" }}
+            </small>
+        </div>
+    {% empty %}
+        <div class="post-card">
+            <h3>No matching posts found.</h3>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">← Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next →</a>
+    {% endif %}
+</div>
+
+{% endblock %}
