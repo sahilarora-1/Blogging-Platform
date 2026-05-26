@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="dashboard-header">
-    <h1>Welcome {{ request.user.username }}</h1>
+    <h1>Welcome Back, {{ request.user.username }}</h1>
     <a class="primary-btn" href="/create-post/">+ Create New Post</a>
 </div>
 
@@ -13,8 +13,8 @@
     {% for post in page_obj %}
         <div class="post-card">
             <h3>{{ post.title }}</h3>
+            <p class="post-meta">Last updated {{ post.updated_at|date:"M d, Y" }}</p>
             
-            <p>Last updated {{ post.updated_at|date:"M d, Y" }}</p>
             {% if post.image %}
                 <img src="{{ post.image.url }}" alt="{{ post.title }}" class="dashboard-image">
             {% endif %}

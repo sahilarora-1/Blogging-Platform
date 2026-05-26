@@ -7,7 +7,10 @@
 <div class="post-card">
     <h1>{{ post.title }}</h1>
 
-    <p>{{ post.content }}</p>
+    <div class="post-content">
+        {{ post.content|linebreaks }}
+    </div>
+
     {% if post.image %}
         <img src="{{ post.image.url }}" alt="{{ post.title }}" class="detail-image">
     {% endif %}
