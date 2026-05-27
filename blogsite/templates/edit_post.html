@@ -19,7 +19,23 @@
         {% endif %}
 
         <input type="file" name="image">
-        <button type="submit">Update</button>
+        <div class="action-links">
+            <button type="submit" name="action" value="publish">
+                {% if post.is_published %}
+                    Update Post
+                {% else %}
+                    Publish
+                {% endif %}
+            </button>
+
+            <button type="submit" name="action" value="draft" class="draft-btn">
+                {% if post.is_published %}
+                    Save as Draft
+                {% else %}
+                    Update Draft
+                {% endif %}
+            </button>
+        </div>
     </form>
 </div>
 

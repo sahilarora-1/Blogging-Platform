@@ -129,7 +129,8 @@ textarea {
     margin-top: 30px;
 }
 
-button, .primary-btn {
+button, .primary-btn,.search-box button,
+.form-box button {
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
     padding: 13px 24px;
@@ -140,11 +141,11 @@ button, .primary-btn {
     display: inline-block;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
-button:hover,
-.primary-btn:hover {
+.primary-btn:hover,
+.search-box button:hover,
+.form-box button:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
 }
@@ -205,7 +206,8 @@ button:hover,
     flex-wrap: wrap;
 }
 
-.action-links a {
+.action-links a, 
+.action-links button {
     text-decoration: none;
     padding: 10px 16px;
     border-radius: 8px;
@@ -216,14 +218,31 @@ button:hover,
 
 .view-btn {
     background: #2563eb;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 .edit-btn {
     background: #16a34a;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
 }
+
+.draft-btn {
+    background: #64748b;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 
 .delete-btn {
     background: #dc2626;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 /*image styling */
@@ -289,4 +308,23 @@ button:hover,
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     font-weight: 500;
     color: #333;
+}
+
+/*Badges for published and Draft */
+.published-badge {
+    background: #dcfce7;
+    color: #166534;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.draft-badge {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
 }
